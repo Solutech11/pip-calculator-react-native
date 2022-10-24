@@ -1,8 +1,12 @@
 import { View, Text,StyleSheet, TextInput, Keyboard, Pressable, TouchableOpacity } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { StatusBar } from 'expo-status-bar';
+import { Ionicons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Home() {
+
+export default function Home({navigation}) {
     const [slTP, setSLTP]= useState(0)
     const [entry, setentry] = useState(0)
     const [contract, setcontract] = useState(0)
@@ -48,6 +52,14 @@ export default function Home() {
             setAns('fill form well!!')
         }
     }
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight:()=><TouchableOpacity onPress={()=>{navigation.navigate('Help')}}>
+            <Ionicons name="help-circle" size={25} color="white" />
+              </TouchableOpacity>
+        })
+    },[navigation]);
   return (
     <Pressable onPress={()=>Keyboard.dismiss()} style={styles.body}>
         <View style={{
